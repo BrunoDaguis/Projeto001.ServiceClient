@@ -33,4 +33,10 @@ jobs:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
+        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
         publishWebProjects: true
+        zipAfterPublish: true
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'Project001.ServiceClient'
