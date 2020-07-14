@@ -19,7 +19,7 @@ namespace Project001.ServiceClient.Api.Controllers
         /// <summary>
         /// Get all actives clients.
         /// </summary>
-        /// <returns>All actives clients</returns>
+        /// <returns>Returns all actives clients</returns>
         /// <response code="200">Returns all actives clients</response>
         /// <response code="400">Error</response> 
         [HttpGet]
