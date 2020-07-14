@@ -73,7 +73,7 @@ namespace Project001.ServiceClient.Api
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "Projeto 001");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Projeto 001");
                 c.RoutePrefix = string.Empty;
 
             });
