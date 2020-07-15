@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Project001.ServiceClient.Api.Extensions;
 using Project001.ServiceClient.Api.Helpers;
 using Project001.ServiceClient.Api.Model;
@@ -12,14 +13,14 @@ using Project001.ServiceClient.Domain.Repositories;
 
 namespace Project001.ServiceClient.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1/api/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
         [HttpPost]
         [AllowAnonymous]
-        [Route("/api/v1/auth")]
-        public async Task<IActionResult> Auth([FromServices]IUserRepository repository, [FromBody]UserAuthModel model)
+        [Route("")]
+        public async Task<IActionResult> Auth([FromServices]IUserRepository repository, [FromServices] IConfiguration configuration, [FromBody]UserAuthModel model)
         {
             try
             {
@@ -28,7 +29,7 @@ namespace Project001.ServiceClient.Api.Controllers
                 if (userExists == null)
                     return BadRequest(new { Message = "Email e/ou senha está(ão) inválido(s)." });
 
-                var token = JwtAuthHelper.GenerateToken(userExists.ToModel());
+                var token = JwtAuthHelper.GenerateToken(configuration["KeySecretAuth"], userExists.ToModel());
 
                 return Ok(new
                 {
@@ -42,5 +43,4 @@ namespace Project001.ServiceClient.Api.Controllers
             }
         }
     }
-}
 }

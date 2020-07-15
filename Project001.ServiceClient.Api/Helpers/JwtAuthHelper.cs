@@ -14,12 +14,11 @@ namespace Project001.ServiceClient.Api.Helpers
 {
     public class JwtAuthHelper
     {
-        public static string GenerateToken(UserModel user)
+        public static string GenerateToken(string secretKey, UserModel user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            //chave secreta, geralmente se coloca em arquivo de configuração
-            var key = Encoding.ASCII.GetBytes("ZWRpw6fDo28gZW0gY29tcHV0YWRvcmE=");
+            var key = Encoding.ASCII.GetBytes(secretKey);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

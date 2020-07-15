@@ -18,6 +18,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Project001.ServiceClient.Api.Helpers;
 
 namespace Project001.ServiceClient.Api
 {
@@ -41,8 +42,13 @@ namespace Project001.ServiceClient.Api
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            string connectionString = Configuration["ConnectionString"];
+
+            if (string.IsNullOrWhiteSpace(connectionString))
+                throw new Exception("Connection String não inicializada");
+
             services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+                options.UseSqlServer(connectionString));
 
             services.AddTransient<IClientRepository, ClientRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
@@ -69,7 +75,9 @@ namespace Project001.ServiceClient.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-            var secretKey = "ZWRpw6fDo28gZW0gY29tcHV0YWRvcmE=";
+            
+            var secretKey = Configuration["KeySecretAuth"];
+
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
