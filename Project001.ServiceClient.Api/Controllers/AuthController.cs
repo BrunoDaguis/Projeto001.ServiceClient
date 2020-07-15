@@ -20,27 +20,29 @@ namespace Project001.ServiceClient.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("")]
-        public async Task<IActionResult> Auth([FromServices]IUserRepository repository, [FromServices] IConfiguration configuration, [FromBody]UserAuthModel model)
+        public async Task<IActionResult> Auth([FromServices]IUserRepository repository, 
+            [FromServices] IConfiguration configuration, 
+            [FromBody]UserAuthModel model)
         {
             try
             {
-                var userExists = await repository.GetAsync(model.Email, model.Password);
+                var user = await repository.GetAsync(model.Email, model.Password);
 
-                if (userExists == null)
+                if (user == null)
                     return BadRequest(new { Message = "Email e/ou senha está(ão) inválido(s)." });
 
-                var token = JwtAuthHelper.GenerateToken(configuration["KeySecretAuth"], userExists.ToModel());
+                var token = JwtAuthHelper.GenerateToken(configuration["KeySecretAuth"], user.ToModel());
 
                 return Ok(new
                 {
                     Token = token,
-                    Usuario = userExists
+                    Usuario = user
                 });
             }
             catch (Exception)
             {
                 return BadRequest(new { Message = "Ocorreu algum erro interno na aplicação, por favor tente novamente." });
-            }
+            }   
         }
     }
 }
