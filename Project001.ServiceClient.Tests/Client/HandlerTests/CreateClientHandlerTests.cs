@@ -35,7 +35,7 @@ namespace Project001.ServiceClient.Tests.Client.HandlerTests
         public async Task Create_Client_Without_Name()
         {
             var result = (GenericCommandResult<ClientEntity>)await _handler.HandleAsync(_commandWithoutName);
-            Assert.AreEqual(result.Success, true);
+            Assert.AreEqual(result.Success, false);
         }
     }
 }
