@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Extensions;
 using Project001.ServiceClient.Domain.Commands;
 using Project001.ServiceClient.Domain.Commands.ClientCommands;
 using Project001.ServiceClient.Domain.Entities;
+using Project001.ServiceClient.Domain.Entities.Enum;
 using Project001.ServiceClient.Domain.Handlers.Interfaces;
 using Project001.ServiceClient.Domain.Repositories;
 
@@ -26,6 +29,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin, Client")]
         public async Task<IEnumerable<ClientEntity>> Get([FromServices] IClientRepository repository)
         {
             var datas = await repository.GetApprovedAsync();
@@ -43,6 +47,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin, Client")]
         public async Task<ClientEntity> GetById([FromServices] IClientRepository repository, int id)
         {
             var datas = await repository.GetAsync(id);
@@ -59,6 +64,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("Repproved")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin, Client")]
         public async Task<IEnumerable<ClientEntity>> GetRepproved([FromServices] IClientRepository repository)
         {
             var datas = await repository.GetRepprovedAsync();
@@ -75,6 +81,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("Pending")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin, Client")]
         public async Task<IEnumerable<ClientEntity>> GetPending([FromServices] IClientRepository repository)
         {
             var datas = await repository.GetPendingAsync();
@@ -105,6 +112,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<GenericCommandResult<ClientEntity>> Create([FromServices] IClientHandler handler,
            [FromBody] CreateClientCommand command)
         {
@@ -135,6 +143,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<GenericCommandResult<ClientEntity>> Update([FromServices] IClientHandler handler,
             [FromBody] UpdateClientCommand command)
         {
@@ -162,6 +171,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("Approve")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<GenericCommandResult<ClientEntity>> Approve([FromServices] IClientHandler handler,
                     [FromBody] ApproveClientCommand command)
         {
@@ -189,6 +199,7 @@ namespace Project001.ServiceClient.Api.Controllers
         [Route("Repprove")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [Authorize(Roles = "Admin")]
         public async Task<GenericCommandResult<ClientEntity>> Repprove([FromServices] IClientHandler handler,
             [FromBody] RepproveClientCommand command)
         {
