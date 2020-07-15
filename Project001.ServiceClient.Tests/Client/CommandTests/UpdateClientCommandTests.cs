@@ -3,33 +3,53 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project001.ServiceClient.Domain.Commands.ClientCommands;
 using Project001.ServiceClient.Domain.Entities.Enum;
 using System;
-using System.Diagnostics;
 
-namespace Project001.ServiceClient.Tests.CommandTests.Client
+namespace Project001.ServiceClient.Tests.Client.CommandTests
 {
     [TestClass]
-    public class CreateClientCommandTests
+    public class UpdateClientCommandTests
     {
         private readonly Fixture _fixture = new Fixture();
 
-        private readonly CreateClientCommand _commandWithoutName;
-        private readonly CreateClientCommand _commandValidName;
+        private readonly UpdateClientCommand _commandWithoutId;
+        private readonly UpdateClientCommand _commandWithId;
 
-        private readonly CreateClientCommand _commandWithoutBirthDate;
-        private readonly CreateClientCommand _commandBirthDateGreaterCurrent;
-        private readonly CreateClientCommand _commandValidBirthDate;
+        private readonly UpdateClientCommand _commandWithoutName;
+        private readonly UpdateClientCommand _commandValidName;
 
-        private readonly CreateClientCommand _commandWithouTypeDocument;
-        private readonly CreateClientCommand _commandInvalidTypeDocument;
-        private readonly CreateClientCommand _commandValidTypeDocument;
+        private readonly UpdateClientCommand _commandWithoutBirthDate;
+        private readonly UpdateClientCommand _commandBirthDateGreaterCurrent;
+        private readonly UpdateClientCommand _commandValidBirthDate;
 
-        private readonly CreateClientCommand _commandWithoutNumberDocument;
-        private readonly CreateClientCommand _commandValidNumberDocument;
+        private readonly UpdateClientCommand _commandWithouTypeDocument;
+        private readonly UpdateClientCommand _commandInvalidTypeDocument;
+        private readonly UpdateClientCommand _commandValidTypeDocument;
 
-        public CreateClientCommandTests()
+        private readonly UpdateClientCommand _commandWithoutNumberDocument;
+        private readonly UpdateClientCommand _commandValidNumberDocument;
+
+        public UpdateClientCommandTests()
         {
+            _commandWithoutId = _fixture
+                                    .Build<UpdateClientCommand>()
+                                    .Without(x => x.Id)
+                                    .With(x => x.Name, _fixture.Create<string>())
+                                    .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
+                                    .With(x => x.TypeDocument, ETypeDocument.Cnh)
+                                    .With(x => x.NumberDocument, _fixture.Create<string>())
+                                    .Create();
+
+            _commandWithId = _fixture
+                                    .Build<UpdateClientCommand>()
+                                    .With(x => x.Id, _fixture.Create<int>())
+                                    .With(x => x.Name, _fixture.Create<string>())
+                                    .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
+                                    .With(x => x.TypeDocument, ETypeDocument.Cnh)
+                                    .With(x => x.NumberDocument, _fixture.Create<string>())
+                                    .Create();
+
             _commandWithoutName = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .Without(x => x.Name)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
@@ -37,7 +57,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandValidName = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => x.Name, _fixture.Create<string>())
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
@@ -45,7 +65,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandWithoutBirthDate = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .Without(x => x.BirthDate)
                                     .With(x => x.Name, _fixture.Create<string>())
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
@@ -53,7 +73,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandBirthDateGreaterCurrent = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(1))
                                     .With(x => x.Name, _fixture.Create<string>())
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
@@ -61,7 +81,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandValidBirthDate = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.Name, _fixture.Create<string>())
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
@@ -69,7 +89,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandWithouTypeDocument = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .Without(x => x.TypeDocument)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.Name, _fixture.Create<string>())
@@ -77,7 +97,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandInvalidTypeDocument = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => (int)x.TypeDocument, 999)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.Name, _fixture.Create<string>())
@@ -85,7 +105,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandValidTypeDocument = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.Name, _fixture.Create<string>())
@@ -93,7 +113,7 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandWithoutNumberDocument = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .Without(x => x.NumberDocument)
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
@@ -101,13 +121,27 @@ namespace Project001.ServiceClient.Tests.CommandTests.Client
                                     .Create();
 
             _commandValidNumberDocument = _fixture
-                                    .Build<CreateClientCommand>()
+                                    .Build<UpdateClientCommand>()
                                     .With(x => x.NumberDocument, _fixture.Create<string>())
                                     .With(x => x.TypeDocument, ETypeDocument.Cnh)
                                     .With(x => x.BirthDate, DateTime.Now.AddDays(-100))
                                     .With(x => x.Name, _fixture.Create<string>())
                                     .Create();
 
+        }
+
+        [TestMethod]
+        public void WithoutId()
+        {
+            _commandWithoutId.Validate();
+            Assert.AreEqual(_commandWithoutId.Valid, false);
+        }
+
+        [TestMethod]
+        public void WithId()
+        {
+            _commandWithId.Validate();
+            Assert.AreEqual(_commandWithId.Valid, true);
         }
 
         [TestMethod]
