@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Project001.ServiceClient.Domain.Commands.ClientCommands;
 using System.Diagnostics;
 
-namespace Project001.ServiceClient.Tests.CommandTests.Client
+namespace Project001.ServiceClient.Tests.Client.CommandTests
 {
     [TestClass]
     public class RepproveClientCommandTests
