@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Project001.ServiceClient.Api.Helpers;
+using Project001.ServiceClient.Api.Extensions;
 
 namespace Project001.ServiceClient.Api
 {
@@ -42,59 +43,9 @@ namespace Project001.ServiceClient.Api
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            string connectionString = Configuration["ConnectionString"];
-
-            if (string.IsNullOrWhiteSpace(connectionString))
-                throw new Exception("Connection String não inicializada");
-
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(connectionString));
-
-            services.AddTransient<IClientRepository, ClientRepository>();
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<IClientHandler, ClientHandler>();
-
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo
-                {
-                    Version = "v1",
-                    Title = "Service Client",
-                    Description = "A api with .net core 3.1",
-                    Contact = new OpenApiContact
-                    {
-                        Name = "Bruno Daguis",
-                        Email = "bruno.daguis@gmail.com",
-                        Url = new Uri("https://www.linkedin.com/in/bruno-daguis/"),
-                    }
-                });
-
-                // Set the comments path for the Swagger JSON and UI.
-                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-                c.IncludeXmlComments(xmlPath);
-            });
-
-            
-            var secretKey = Configuration["KeySecretAuth"];
-
-            services.AddAuthentication(x =>
-            {
-                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(x =>
-            {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = true;
-                x.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey)),
-                    ValidateIssuer = false,
-                    ValidateAudience = false
-                };
-            });
+            services.ConfigureDependecyInjection(Configuration);
+            services.ConfigureSwagger();
+            services.ConfigureJwtAuth(Configuration);            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
