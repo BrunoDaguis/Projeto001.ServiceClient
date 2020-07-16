@@ -39,9 +39,9 @@ namespace Project001.ServiceClient.Api.Controllers
                     Usuario = user
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest(new { Message = "Ocorreu algum erro interno na aplicação, por favor tente novamente." });
+                return BadRequest(new { Message = ex.Message });
             }   
         }
     }
