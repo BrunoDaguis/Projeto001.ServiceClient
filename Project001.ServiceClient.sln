@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project001.ServiceClient.Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project001.ServiceClient.Infra", "Project001.ServiceClient.Infra\Project001.ServiceClient.Infra.csproj", "{16DB919C-2F65-49EB-B69B-089815F6CFA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project001.ServiceClient.Api", "Project001.ServiceClient.Api\Project001.ServiceClient.Api.csproj", "{240E1866-5F90-4CB6-B370-EDEE47F2B655}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project001.ServiceClient.Api", "Project001.ServiceClient.Api\Project001.ServiceClient.Api.csproj", "{240E1866-5F90-4CB6-B370-EDEE47F2B655}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project001.ServiceClient.Tests.Integration", "Project001.ServiceClient.Tests.Integration\Project001.ServiceClient.Tests.Integration.csproj", "{FE32E0D7-DC01-4CF1-999C-65FB658D2133}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{240E1866-5F90-4CB6-B370-EDEE47F2B655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{240E1866-5F90-4CB6-B370-EDEE47F2B655}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{240E1866-5F90-4CB6-B370-EDEE47F2B655}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE32E0D7-DC01-4CF1-999C-65FB658D2133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE32E0D7-DC01-4CF1-999C-65FB658D2133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE32E0D7-DC01-4CF1-999C-65FB658D2133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE32E0D7-DC01-4CF1-999C-65FB658D2133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
