@@ -31,7 +31,7 @@ namespace Project001.ServiceClient.Tests.Client.HandlerTests
                                     .Create();
         }
 
-        [TestMethod]
+        [TestMethod("[Handler] Create Client - Without Name - Expected: False")]
         public async Task Create_Client_Without_Name()
         {
             var result = (GenericCommandResult<ClientEntity>)await _handler.HandleAsync(_commandWithoutName);

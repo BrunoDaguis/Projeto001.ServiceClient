@@ -130,58 +130,58 @@ namespace Project001.ServiceClient.Tests.Client.CommandTests
 
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Without Id - Expected: False")]
         public void WithoutId()
         {
             _commandWithoutId.Validate();
             Assert.AreEqual(_commandWithoutId.Valid, false);
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Id Valid - Expected: True")]
         public void WithId()
         {
             _commandWithId.Validate();
             Assert.AreEqual(_commandWithId.Valid, true);
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Without Name - Expected: False")]
         public void WithoutName()
         {
             _commandWithoutName.Validate();
             Assert.AreEqual(_commandWithoutName.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Name Valid - Expected: True")]
         public void ValidName()
         {
             _commandValidName.Validate();
             Assert.AreEqual(_commandValidName.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Without birthDate - Expected: False")]
         public void WithoutBirthDate()
         {
             _commandWithoutBirthDate.Validate();
             Assert.AreEqual(_commandWithoutBirthDate.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - BirthDate Invalid - Expected: False")]
         public void BirthDateGreaterCurrent()
         {
             _commandBirthDateGreaterCurrent.Validate();
             Assert.AreEqual(_commandBirthDateGreaterCurrent.Valid, false);
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Update Client - BirtDate Valid - Expected: True")]
         public void ValidBirthDate()
         {
             _commandValidBirthDate.Validate();
             Assert.AreEqual(_commandValidBirthDate.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Without Type Document - Expected: False")]
         public void WithouTypeDocument()
         {
             _commandWithouTypeDocument.Validate();
             Assert.AreEqual(_commandWithouTypeDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Type Document Invalid - Expected: False")]
         public void InvalidTypeDocument()
         {
             _commandInvalidTypeDocument.Validate();
@@ -193,19 +193,19 @@ namespace Project001.ServiceClient.Tests.Client.CommandTests
             }*/
             Assert.AreEqual(_commandInvalidTypeDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Type Document Valid - Expected: True")]
         public void ValidTypeDocument()
         {
             _commandValidTypeDocument.Validate();
             Assert.AreEqual(_commandValidTypeDocument.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Without Number Document - Expected: False")]
         public void WithoutNumberDocument()
         {
             _commandWithoutNumberDocument.Validate();
             Assert.AreEqual(_commandWithoutNumberDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Update Client - Number Documento Valid - Expected: True")]
         public void ValidNumberDocument()
         {
             _commandValidNumberDocument.Validate();

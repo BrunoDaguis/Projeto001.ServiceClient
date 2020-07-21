@@ -110,44 +110,44 @@ namespace Project001.ServiceClient.Tests.Client.CommandTests
 
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Without Name - Expected: False")]
         public void WithoutName()
         {
             _commandWithoutName.Validate();
             Assert.AreEqual(_commandWithoutName.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Name Valid - Expected: True")]
         public void ValidName()
         {
             _commandValidName.Validate();
             Assert.AreEqual(_commandValidName.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Without birthDate - Expected: False")]
         public void WithoutBirthDate()
         {
             _commandWithoutBirthDate.Validate();
             Assert.AreEqual(_commandWithoutBirthDate.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - BirthDate Invalid - Expected: False")]
         public void BirthDateGreaterCurrent()
         {
             _commandBirthDateGreaterCurrent.Validate();
             Assert.AreEqual(_commandBirthDateGreaterCurrent.Valid, false);
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Create Client - BirtDate Valid - Expected: True")]
         public void ValidBirthDate()
         {
             _commandValidBirthDate.Validate();
             Assert.AreEqual(_commandValidBirthDate.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Without Type Document - Expected: False")]
         public void WithouTypeDocument()
         {
             _commandWithouTypeDocument.Validate();
             Assert.AreEqual(_commandWithouTypeDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Type Document Invalid - Expected: False")]
         public void InvalidTypeDocument()
         {
             _commandInvalidTypeDocument.Validate();
@@ -159,19 +159,19 @@ namespace Project001.ServiceClient.Tests.Client.CommandTests
             }*/
             Assert.AreEqual(_commandInvalidTypeDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Type Document Valid - Expected: True")]
         public void ValidTypeDocument()
         {
             _commandValidTypeDocument.Validate();
             Assert.AreEqual(_commandValidTypeDocument.Valid, true);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Without Number Document - Expected: False")]
         public void WithoutNumberDocument()
         {
             _commandWithoutNumberDocument.Validate();
             Assert.AreEqual(_commandWithoutNumberDocument.Valid, false);
         }
-        [TestMethod]
+        [TestMethod("[Command] Create Client - Number Documento Valid - Expected: True")]
         public void ValidNumberDocument()
         {
             _commandValidNumberDocument.Validate();

@@ -31,7 +31,7 @@ namespace Project001.ServiceClient.Tests.Client.HandlerTests
                                     .Create();
         }
 
-        [TestMethod]
+        [TestMethod("[Handler] Client Approve - Without Id - Expected: False")]
         public async Task Approve_Client_Without_Id()
         {
             var result = (GenericCommandResult<ClientEntity>)await _handler.HandleAsync(_commandWithoutId);

@@ -26,14 +26,14 @@ namespace Project001.ServiceClient.Tests.Client.CommandTests
                                     .Create();
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Repprove Client - Without Id - Expected: False")]
         public void WithoutId()
         {
             _commandWithoutId.Validate();
             Assert.AreEqual(_commandWithoutId.Valid, false);
         }
 
-        [TestMethod]
+        [TestMethod("[Command] Repprove Client - Id Valid - Expected: True")]
         public void WithId()
         {
             _commandWithId.Validate();
